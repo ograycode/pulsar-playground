@@ -1,0 +1,21 @@
+version: '3'
+services:
+  pulsar:
+    image: apachepulsar/pulsar:2.5.0
+    ports:
+      - "8080:8080"
+      - "6650:6650"
+    environment:
+      - PULSAR_MEM=" -Xms512m -Xmx512m -XX:MaxDirectMemorySize=1g"
+    command: >
+      bin/pulsar standalone
+  statsd:
+    image: hopsoft/graphite-statsd
+    ports:
+        - "9080:80"
+        - "9081:81"
+        - "2003-2004"
+        - "2023-2024"
+        - "8125:8125/udp"
+        - "8126"
+        - "3000"
